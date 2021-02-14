@@ -51,7 +51,7 @@ class UserMessage(BasicModel):
         verbose_name='用户消息'
         verbose_name_plural=verbose_name
     
-# 用户课程
+# 用户课程 
 class UserCourse(BasicModel):
     user = models.ForeignKey(user_profile,verbose_name='用户')
     course = models.ForeignKey(Course,verbose_name='课程')
