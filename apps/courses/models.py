@@ -1,5 +1,5 @@
 from apps.users.models import BasicModel
-from apps.organizations.modles import Teacher
+from apps.organizations.models import Teacher
 from django.db import models
 
 degree = (
@@ -29,7 +29,7 @@ class Course(BasicModel):
         verbose_name_plural = verbose_name
 
 class Lesson(BasicModel):
-    course = models.ForeignKeyField(Course,on_delete=models.CASECADE)
+    course = models.ForeignKey(Course,on_delete=models.CASCADE)
     name = models.CharField(verbose_name='章节名称',max_length=300)
     learn_times = models.IntegerField(verbose_name='学习时长',default=0)
     class Meta:
@@ -37,7 +37,7 @@ class Lesson(BasicModel):
         verbose_name_plural = verbose_name
         
 class Video(BasicModel):
-    lesson = models.ForeignKeyField(Lesson,verbose_name='章节名',on_delete=models.CASECADE)
+    lesson = models.ForeignKey(Lesson,verbose_name='章节名',on_delete=models.CASCADE)
     name = models.CharField(verbose_name='视频名称',max_length=300)
     learn_times = models.IntegerField(verbose_name='学习时长',default=0)
     url = models.CharField(max_length=300,verbose_name='访问地址')
@@ -47,9 +47,9 @@ class Video(BasicModel):
         verbose_name_plural = verbose_name
         
 class CourseResource(BasicModel):
-    course = models.ForeignKeyField(Course,verbose_name='课程',Lesson,on_delete=models.CASECADE)
+    course = models.ForeignKey(Course,verbose_name='课程',on_delete=models.CASCADE)
     name = models.CharField(verbose_name='名称',max_length=300)
-    file = models.FileField(verbose_name='封面图',upload_to='course/resourse/%Y/%m', height_field=None, width_field=None, max_length=200)
+    file = models.FileField(verbose_name='封面图',upload_to='course/resourse/%Y/%m', max_length=200)
     
     class Meta:
         verbose_name = '课程资源'

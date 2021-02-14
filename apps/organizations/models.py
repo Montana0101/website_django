@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.users.modles import BasicModel
+from apps.users.models import BasicModel
 
 category = (
     ('pxjg','培训机构'),
@@ -25,7 +25,7 @@ class CourseOrg(BasicModel):
     fav_nums = models.IntegerField(verbose_name='收藏数',default=0)
     image = models.ImageField(verbose_name='logo', upload_to='org/%Y/%m',max_length=300)
     address = models.CharField(verbose_name='机构地址',max_length=300)
-    students = models.CharField(verbose_name='学习人数',default=0)
+    students = models.IntegerField(verbose_name='学习人数',default=0)
     course_nums = models.IntegerField(verbose_name='课程数',default=0)
     city = models.ForeignKey(City,on_delete=models.CASCADE,verbose_name='所属城市')
     

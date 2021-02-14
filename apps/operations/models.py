@@ -1,7 +1,7 @@
 from django.db import models
 
-from apps.users.modles import BasicModel
-from apps.courses.modles import Course
+from apps.users.models import BasicModel
+from apps.courses.models import Course
 from django.contrib.auth import get_user_model
 
 user_profile = get_user_model()
@@ -23,8 +23,8 @@ class UserAsk(BasicModel):
 
 # 课程评论
 class CourseComments(BasicModel):
-    user = models.ForeignKey(user_profile,verbose_name='用户')
-    course = models.ForeignKey(Course,verbose_name='课程')
+    user = models.ForeignKey(user_profile,verbose_name='用户',on_delete=models.CASCADE)
+    course = models.ForeignKey(Course,verbose_name='课程',on_delete=models.CASCADE)
     comments = models.TextField(verbose_name='评论内容')
     
     class Meta:
@@ -33,7 +33,7 @@ class CourseComments(BasicModel):
 
 # 收藏
 class UserFavourite(BasicModel):
-    user = models.ForeignKey(user_profile,verbose_name='用户')
+    user = models.ForeignKey(user_profile,verbose_name='用户',on_delete=models.CASCADE)
     fav_id = models.IntegerField(verbose_name='数据id')
     fav_type = models.IntegerField(verbose_name='收藏类型',choices=fav_types,default=1)
     
@@ -43,7 +43,7 @@ class UserFavourite(BasicModel):
 
 # 用户消息
 class UserMessage(BasicModel):
-    user = models.ForeignKey(user_profile,verbose_name='用户')
+    user = models.ForeignKey(user_profile,verbose_name='用户',on_delete=models.CASCADE)
     message = models.CharField(verbose_name='消息内容',max_length=500)
     has_read = models.BooleanField(verbose_name='是否已读',default=False)
     
@@ -53,8 +53,8 @@ class UserMessage(BasicModel):
     
 # 用户课程 
 class UserCourse(BasicModel):
-    user = models.ForeignKey(user_profile,verbose_name='用户')
-    course = models.ForeignKey(Course,verbose_name='课程')
+    user = models.ForeignKey(user_profile,verbose_name='用户',on_delete=models.CASCADE)
+    course = models.ForeignKey(Course,verbose_name='课程',on_delete=models.CASCADE)
     
     class Meta:
         verbose_name='用户课程'
