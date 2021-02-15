@@ -20,8 +20,8 @@ class UserProfile(AbstractUser):
     birthday = models.DateField(verbose_name='生日',null=True,blank=True)
     gender= models.CharField(verbose_name='性别',choices=GENDER_CHOICES,max_length=7)
     address = models.CharField(verbose_name='地址', max_length=50,default="")
-    mobile = models.CharField(verbose_name='手机',max_length=11,unique=True)
-    image = models.ImageField(upload_to='image/%Y/%m', height_field=None, width_field=None, max_length=None,default='default.png')
+    mobile = models.IntegerField(verbose_name='手机',max_length=11,unique=True)
+    image = models.ImageField(verbose_name='头像',upload_to='image/%Y/%m', height_field=None, width_field=None, max_length=None,default='default.png')
     
     class Meta:
         verbose_name = '用户信息'
@@ -31,5 +31,5 @@ class UserProfile(AbstractUser):
         if self.nick_name :
             return self.nick_name
         else :
-            return self.name
+            return self.username
     
